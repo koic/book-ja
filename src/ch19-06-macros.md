@@ -77,7 +77,7 @@ Listing 19-28 shows a slightly simplified definition of the `vec!` macro.
 
 <span class="filename">Filename: src/lib.rs</span>
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-28/src/lib.rs}}
 ```
 
@@ -151,9 +151,9 @@ effectively deprecated. With this in mind, as well as the fact that most Rust
 programmers will *use* macros more than *write* macros, we won’t discuss
 `macro_rules!` any further. To learn more about how to write macros, consult
 the online documentation or other resources, such as [“The Little Book of Rust
-Macros”][tlborm].
+Macros”][tlborm] started by Daniel Keep and continued by Lukas Wirth.
 
-[tlborm]: https://danielkeep.github.io/tlborm/book/index.html
+[tlborm]: https://veykril.github.io/tlborm/
 
 ### Procedural Macros for Generating Code from Attributes
 
@@ -168,9 +168,9 @@ function-like) all work in a similar fashion.
 
 When creating procedural macros, the definitions must reside in their own crate
 with a special crate type. This is for complex technical reasons that we hope
-to eliminate in the future. Using procedural macros looks like the code in
+to eliminate in the future. Defining procedural macros looks like the code in
 Listing 19-29, where `some_attribute` is a placeholder for using a specific
-macro.
+macro variety.
 
 <span class="filename">Filename: src/lib.rs</span>
 
@@ -182,7 +182,7 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 }
 ```
 
-<span class="caption">Listing 19-29: An example of using a procedural
+<span class="caption">Listing 19-29: An example of defining a procedural
 macro</span>
 
 The function that defines a procedural macro takes a `TokenStream` as an input
@@ -230,7 +230,7 @@ Next, we’ll define the `HelloMacro` trait and its associated function:
 
 <span class="filename">Filename: src/lib.rs</span>
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-20-impl-hellomacro-for-pancakes/hello_macro/src/lib.rs}}
 ```
 
@@ -280,7 +280,7 @@ in a moment, so we need to add them as dependencies. Add the following to the
 <span class="filename">Filename: hello_macro_derive/Cargo.toml</span>
 
 ```toml
-{{#include ../listings/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/Cargo.toml:7:12}}
+{{#include ../listings/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/Cargo.toml:6:12}}
 ```
 
 To start defining the procedural macro, place the code in Listing 19-31 into
@@ -484,11 +484,11 @@ Function-like macros define macros that look like function calls. Similarly to
 `macro_rules!` macros, they’re more flexible than functions; for example, they
 can take an unknown number of arguments. However, `macro_rules!` macros can be
 defined only using the match-like syntax we discussed in the section
-[“Declarative Macros with `macro_rules!` for General Metaprogramming”][decl]
-earlier. Function-like macros take a `TokenStream` parameter and their
-definition manipulates that `TokenStream` using Rust code as the other two
-types of procedural macros do. An example of a function-like macro is an `sql!`
-macro that might be called like so:
+[“Declarative Macros with `macro_rules!` for General
+Metaprogramming”][decl]<!-- ignore --> earlier. Function-like macros take a
+`TokenStream` parameter and their definition manipulates that `TokenStream`
+using Rust code as the other two types of procedural macros do. An example of a
+function-like macro is an `sql!` macro that might be called like so:
 
 [decl]: #declarative-macros-with-macro_rules-for-general-metaprogramming
 

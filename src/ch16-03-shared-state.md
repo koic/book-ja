@@ -134,9 +134,7 @@ multiple-ownership method we discussed in Chapter 15.
 In Chapter 15, we gave a value multiple owners by using the smart pointer
 `Rc<T>` to create a reference counted value. Let’s do the same here and see
 what happens. We’ll wrap the `Mutex<T>` in `Rc<T>` in Listing 16-14 and clone
-the `Rc<T>` before moving ownership to the thread. Now that we’ve seen the
-errors, we’ll also switch back to using the `for` loop, and we’ll keep the
-`move` keyword with the closure.
+the `Rc<T>` before moving ownership to the thread.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -176,11 +174,9 @@ Fortunately, `Arc<T>` *is* a type like `Rc<T>` that is safe to use in
 concurrent situations. The *a* stands for *atomic*, meaning it’s an *atomically
 reference counted* type. Atomics are an additional kind of concurrency
 primitive that we won’t cover in detail here: see the standard library
-documentation for [`std::sync::atomic`] for more details. At this point, you just
-need to know that atomics work like primitive types but are safe to share
-across threads.
-
-[`std::sync::atomic`]: ../std/sync/atomic/index.html
+documentation for [`std::sync::atomic`][atomic]<!-- ignore --> for more
+details. At this point, you just need to know that atomics work like primitive
+types but are safe to share across threads.
 
 You might then wonder why all primitive types aren’t atomic and why standard
 library types aren’t implemented to use `Arc<T>` by default. The reason is that
@@ -241,3 +237,5 @@ useful information.
 
 We’ll round out this chapter by talking about the `Send` and `Sync` traits and
 how we can use them with custom types.
+
+[atomic]: ../std/sync/atomic/index.html
