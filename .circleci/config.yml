@@ -7,7 +7,7 @@ jobs:
     parallelism: 1
     branches:
       ignore:
-        - master
+        - main
         - second-edition-ja
     steps:
       - run:
